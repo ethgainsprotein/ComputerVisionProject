@@ -6,7 +6,7 @@ import cv2
 
 import configparser
 # Load YOLO model
-model = YOLO('yolov10x.pt')
+model = YOLO('ethanscustommodel.pt')
 config = configparser.ConfigParser()
 config.read('config.ini')
 

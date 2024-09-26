@@ -1,15 +1,10 @@
 import os
-import numpy as np
-import pandas as pd
 from ultralytics import YOLO, solutions
 import cv2
-from mysimpletracker import*
 import configparser
 
-
-
 # Load YOLO model
-model = YOLO('EthansModel4UMD.pt')
+model = YOLO('EthansModel4UMD.pt') #model is 134722mb and hence cannot be included in github
 #create_config()
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -20,10 +15,10 @@ foldercount=0
 video_dir = config.get('General', 'folderForVideos')
 filename4counts = config.get('General', 'fileWithCounts')
 
-listoffolders = video_dir.split(",")
+listoffolders = video_dir.split(",") #assuming , is the separator between different folders that need to be processed
 # Loop through all folders 
 for videos in listoffolders:
-    lst = videos.split(";")
+    lst = videos.split(";") #assuming that each comma separated string has a ; separating the actual video/camera folder and the Y-Axis to be offshot for the camera/folder
     moveYAxisBy=int(lst[1]) 
     print("Processing folder ..."+videos)        
     video_dir=lst[0]
@@ -36,10 +31,13 @@ for videos in listoffolders:
             cap = cv2.VideoCapture(video_path)
 
             
-            # Define region points as a polygon with 5 points
+            # Define region points as a polygon with 5 points for counting both in and out autos
             region_points = [(20, 150 + moveYAxisBy), (1080, 150 + moveYAxisBy), 
                             (1080, 175 + moveYAxisBy), (20, 175 + moveYAxisBy), 
                             (20, 150 + moveYAxisBy)]
+
+            # Define region points for down moving veh only 
+            #region_points = [(5, 150+moveYAxisBy), (1080-800, 150+moveYAxisBy), (1080-800, 200+moveYAxisBy), (5, 200+moveYAxisBy), (5, 150+moveYAxisBy)]
 
             # Initialize object counter
             counter = solutions.ObjectCounter(

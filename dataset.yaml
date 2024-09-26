@@ -1,6 +1,6 @@
-path: /Users/Admin/Documents/YOLOProjects/Yolo4umd/  # dataset root dir
-train: Datasets/images/train  # train images (relative to 'path') 128 images
-val: Datasets/images/val # val images (relative to 'path') 128 images
+path: /Users/Admin/Documents/YOLOProjects/Yolo4umd/  # the dir/folder that is the base folder of the Dataset dir
+train: Datasets/images/train  # training images (relative to 'path') ...currently there are 128 images
+val: Datasets/images/val # val images (relative to 'path') .. 2 images
 # test:  # test images (optional)
 train_label_dir: Datasets/labels/train
 val_label_dir: Datasets/labels/val
